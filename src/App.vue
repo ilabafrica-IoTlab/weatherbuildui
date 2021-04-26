@@ -1,6 +1,16 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  
+  <HelloWorld msg="WEATHER BUILD"/>
+
+<div id="app">
+    <HelloWorld
+        ref="map"
+        apiKey="AIzaSyBaKeH0sIEWmRiiOlZZi-Kjg5AJbOSIDWQ"
+        latitude="37"
+        longitude="121"
+        zoom="10"
+        />
+</div>
 </template>
 
 <script>
@@ -10,17 +20,18 @@ export default {
   name: 'App',
   components: {
     HelloWorld
+  },
+  mounted(){
+      let map = this.$refs.map;
+      map.dropMarker({Latitude: 37, Longitude: -121});
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style 
+    body{
+      margin:0;
+    }
 </style>
+
+
