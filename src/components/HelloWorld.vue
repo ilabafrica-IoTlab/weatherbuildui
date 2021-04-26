@@ -16,7 +16,9 @@ export default {
   data(){
     return{
       platform:{},
-      map:{}
+      map:{},
+      geocodingService:{}
+    
     }
   },
   props: {
@@ -30,6 +32,7 @@ export default {
     this.platform = new H.service.platform({
       "apikey": this.apiKey
     });
+    this.geocodingService = this.platform.getGeocodingService();
   },
   mounted(){
     this.map = new H.Map(
@@ -42,9 +45,19 @@ export default {
     );
   },
   methods:{
-    dropMarker(position){
-      let marker = new H.map.Marker({ lat: position.Latitude, lng: position.Longitude});
-      this.map.addObject(marker);
+    dropMarker(query){
+        this.geocodingService.geocode({searchText: query}, data =>{
+         if(data.Response.View.length > 0) {
+           if(data.Response.View[0].Result.length > 0){
+             let position = data.Response.View[0].Result[0].Location.DisplayPosition;
+           }
+         }
+        },error =>{
+          console.error(error);
+        });
+
+     /* let marker = new H.map.Marker({ lat: position.Latitude, lng: position.Longitude});
+      this.map.addObject(marker);*/
     }
   }
 }

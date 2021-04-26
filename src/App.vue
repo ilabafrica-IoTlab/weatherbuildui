@@ -23,7 +23,7 @@ export default {
   },
   mounted(){
       let map = this.$refs.map;
-      map.dropMarker({Latitude: 37, Longitude: -121});
+      map.dropMarker("Nairobi , Kenya");
   }
 }
 </script>
